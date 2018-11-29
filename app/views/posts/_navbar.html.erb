@@ -1,0 +1,33 @@
+<style>
+.navlink {
+  font-size: 1.25rem;
+  color: white;
+}
+.navlink:hover {
+  color: white;
+  text-decoration: none;
+}
+</style>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-info">
+  <a class="navbar-brand" href="/posts">BLOG ME</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!-- SOMEHOW THIS LINE IS KEEPING DROPDOWN TO THE RIGHT -->
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <% if user_signed_in? %>
+    <div class="nav-item dropdown">
+            <%= link_to "Log out", destroy_user_session_path, class: "navlink",
+                    method: :delete%>
+    </div>
+    <% else %>
+    <div class="nav-item dropdown">
+        <a class="nav-link navbar-brand" href="/users/sign_in">Log in<span class="sr-only">(current)</span></a>
+        <a class="nav-link navbar-brand" href="/users/sign_up">Sign up<span class="sr-only">(current)</span></a>
+    </div>
+  </div>
+  <% end %>
+</nav>

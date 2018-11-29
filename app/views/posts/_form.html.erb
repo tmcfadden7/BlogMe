@@ -1,0 +1,128 @@
+<style>
+.card {
+      margin: 0 auto; /* Added */
+      float: none; /* Added */
+      margin-bottom: 10px; /* Added */
+      padding: 10px;
+      border-style:solid;
+      border-width: 2px;
+}
+
+p {
+  margin-bottom: 3px;
+}
+</style>
+
+<div class="container text-center">
+
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<div class="container-fluid text-center">
+  <div class="card border-info mb-3 d-inline-block text-truncate" style="max-width: 20rem;">
+    <div class="card-img-top">
+      <p><%= form.file_field :picture %></p>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <strong><%= form.label :title %></strong>: <%= post.title %> <p><%= form.text_field :title %></p>
+      </li>
+
+      <li class="list-group-item">
+        <strong><%= form.label :genre %></strong>: <%= post.genre %> <p><%= form.text_field :genre %>
+      </li>
+    </ul>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <strong><%= form.label :description %></strong>: <%= post.description %> <p><%= form.text_area :description %></p>
+      </li>
+      <li class="list-group-item">
+        <strong><%= form.label :rating %></strong>: <%= post.rating %> <p><%= form.number_field :rating, in: 1..10 %></p>
+      </li>
+    </ul>
+
+    <br>
+    <p>
+      <%= form.submit %>
+    </p>
+    <p>
+      <a href="/posts" class="badge badge-info">Back</a>
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid text-center">
+  <div class="card border-info mb-3" style="max-width: 20rem;">
+    <h4>
+      <%= form.label :picture %>
+    </h4>
+    <p>
+      <%= form.file_field :picture %>
+    </p>
+
+    <h4>
+      <%= form.label :title %>
+    </h4>
+    <p>
+      <%= form.text_field :title %>
+    </p>
+
+    <h4>
+      <%= form.label :genre %>
+    </h4>
+    <p>
+      <%= form.text_field :genre %>
+    </p>
+
+    <h4>
+      <%= form.label :description %>
+    </h4>
+    <p>
+      <%= form.text_area :description %>
+    </p>
+
+    <h4>
+      <%= form.label :rating %>
+    </h4>
+    <p>
+        <%= form.number_field :rating, in: 1..10 %>
+    </p>
+    <br>
+    <p>
+      <%= form.submit %>
+    </p>
+    <p>
+      <%= link_to 'Back', posts_path %>
+    </p>
+  </div>
+<% end %>
+</div> -->

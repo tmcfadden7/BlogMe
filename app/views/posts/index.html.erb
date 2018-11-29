@@ -1,0 +1,62 @@
+<style>
+.link {
+  color: white;
+}
+.card {
+       margin: 0 auto; /* Added */
+       float: none; /* Added */
+       margin-bottom: 10px; /* Added */
+       padding: 10px;
+       border-style:solid;
+       border-width: 2px;
+}
+</style>
+
+<div class="container-fluid text-center">
+  <% if user_signed_in? %>
+    <h2 class="text-info">Welcome <%= current_user.username %>!</h2>
+    <h3><a href="/posts/new" class="badge badge-info">New Post</a></h3>
+    <% else %>
+    <h2 class="text-info">Welcome!</h2>
+  <% end %>
+</div>
+
+    <% @posts.each do |post| %>
+
+<div class="container-fluid text-center">
+  <div class="card border-info mb-3" style="max-width: 20rem;">
+    <% if post.picture.attached?%>
+    <div class="card-img-top"><%= image_tag(post.photo) %></div>
+    <% end %>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Title: </strong><%= post.title %></li>
+      <li class="list-group-item"><strong>Description: </strong><%= post.description %></li>
+    </ul>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Genre: </strong><%= post.genre %> </li>
+      <li class="list-group-item"><strong>Rating: </strong><%= post.rating %></li>
+      <li class="list-group-item"><strong>User: </strong><%= post.user.username %></li>
+    </ul>
+    <div class="card-body">
+      <% if post.user == current_user %>
+      <p class="badge badge-info">
+        <%= link_to 'Edit', edit_post_path(post), class: "link" %>
+      </p> |
+      <p class="badge badge-info">
+        <%= link_to'Delete', post_path(post), class: "link",
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+      </p>
+      <% end %>
+      <% if !user_signed_in? %>
+      <p class="badge badge-info">
+        <%= link_to 'Log in', new_user_session_path, class: "link" %>
+      </p> |
+      <p class="badge badge-info">
+        <%= link_to'Sign up',  new_user_registration_path, class: "link" %>
+      </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
